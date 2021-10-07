@@ -1,4 +1,16 @@
 body{
-    background-color: darkblue;
+    background-color: #2a475e;
     color: white;
+}
+
+.menu-button{
+    width: 5vh;
+    height: 5vh;
+
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.modal{
+    color: black;
 }
