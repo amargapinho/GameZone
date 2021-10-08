@@ -6,7 +6,7 @@ class Game{
     private $gameName;
     private $images;
     private $description;
-    private $categorieID;
+    private $categories;
     private $releaseDate;
     private $price;
     private $review;
@@ -115,11 +115,11 @@ class Game{
     /**
      * Get the value of categorieID
      * 
-     * @return int
+     * @return Category[]
      */ 
-    public function getCategorieID()
+    public function getCategories()
     {
-        return $this->categorieID;
+        return $this->categories;
     }
 
     /**
@@ -127,9 +127,18 @@ class Game{
      *
      * @return  self
      */ 
-    public function setCategorieID(int $categorieID)
+    public function setCategories(array $categories)
     {
-        $this->categorieID = $categorieID;
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    /**
+     * @return self
+     */
+    public function addCategory(Category $category){
+        $this->categories[] = $category;
 
         return $this;
     }
