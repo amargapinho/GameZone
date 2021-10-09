@@ -17,6 +17,23 @@ class Game{
     private $deleted;
 
     /**
+     * @return self
+     */
+    public function populate(array $data){
+        return $this
+        ->setGameId((int)$data['gameId'])
+        ->setGameName($data['gameName'])
+        ->setDescription($data['description'])
+        ->setReleaseDate($data['releaseDate'])
+        ->setPrice((float)$data['price'])
+        ->setReview((int)$data['review'])
+        ->setWishlisted((bool)$data['wishlisted'])
+        ->setFavored((bool)$data['favored'])
+        ->setPurchaseDate($data['purchaseDate'])
+        ->setDeleted((bool)$data['deleted']);
+    }
+
+    /**
      * Get the value of gameId
      * 
      * @return int
@@ -181,7 +198,7 @@ class Game{
      *
      * @return  self
      */ 
-    public function setPrice(int $price)
+    public function setPrice(float $price)
     {
         $this->price = $price;
 
@@ -191,7 +208,7 @@ class Game{
     /**
      * Get the value of review
      * 
-     * @return int
+     * @return float
      */ 
     public function getReview()
     {

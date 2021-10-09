@@ -9,6 +9,16 @@ class Category{
     private $deleted;
 
     /**
+     * @return self
+     */
+    public function populate(array $data){
+        return $this
+        ->setCategoryId((int)$data['categoryId'])
+        ->setCategoryName($data['categoryName'])
+        ->setDeleted((bool)$data['deleted']);
+    }
+
+    /**
      * Get the value of categoryId
      * 
      * @return int
