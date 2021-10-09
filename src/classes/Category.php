@@ -1,5 +1,7 @@
 <?php
 
+namespace GameZone;
+
 class Category{
 
     private $categoryId;

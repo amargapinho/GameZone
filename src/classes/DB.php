@@ -1,5 +1,8 @@
 <?php
 
+namespace GameZone;
+
+use PDO;
 
 class DB extends PDO{
 

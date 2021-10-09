@@ -1,5 +1,6 @@
 <?php
 
+namespace GameZone;
 class Game{
 
     private $gameId;
