@@ -9,7 +9,7 @@ trait Singleton{
     /**
      * @return self
      */
-    public static function getInstance(){
+    public static function getInstance(): self{
         if(!isset(self::$instance)){
             self::$instance = new self();
         }
