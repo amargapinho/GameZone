@@ -24,8 +24,7 @@ class AmazonConfig{
      * 
      * @return string
      */ 
-    public function getSecretKey(): string
-    {
+    public function getSecretKey(): string{
         return $this->secretKey;
     }
 
