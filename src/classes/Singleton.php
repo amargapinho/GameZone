@@ -6,7 +6,10 @@ trait Singleton{
 
     private static $instance;
 
-    public static function getInstance(){
+    /**
+     * @return self
+     */
+    public static function getInstance(): self{
         if(!isset(self::$instance)){
             self::$instance = new self();
         }
