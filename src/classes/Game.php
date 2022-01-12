@@ -345,4 +345,23 @@ class Game extends DatabaseObject{
     protected function prepareDelete(): PDOStatement{
         return DB::getInstance()->prepare('UPDATE games SET deleted = TRUE WHERE gameID = ?');
     }
+
+    public static function importCSV(string $csv): self{
+        $game = new Game();
+
+        $csvArray = explode(";", $csv);
+
+        $game
+        ->setGameName($csvArray[0])
+        ->setDescription($csvArray[1])
+        ->setReleaseDate($csvArray[2])
+        ->setPrice($csvArray[3])
+        ->setReview($csvArray[4])
+        ->setWishlisted($csvArray[5])
+        ->setPurchaseDate($csvArray[6])
+        ->setDeleted($csvArray[6])
+        ->save();
+
+        return $game;
+    }
 }
