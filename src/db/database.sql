@@ -5,37 +5,46 @@ CREATE TABLE IF NOT EXISTS "categories" (
 	"deleted"	INTEGER NOT NULL,
 	PRIMARY KEY("categorieID" AUTOINCREMENT)
 );
+CREATE TABLE IF NOT EXISTS "gameCategories" (
+	"gameID"	INTEGER NOT NULL,
+	"categorieID"	INTEGER NOT NULL,
+	PRIMARY KEY("gameID","categorieID"),
+	FOREIGN KEY("categorieID") REFERENCES "categories"("categorieID"),
+	FOREIGN KEY("gameID") REFERENCES "games"("gameID")
+);
+CREATE TABLE IF NOT EXISTS "images" (
+	"imageName"	TEXT NOT NULL,
+	"gameID"	INTEGER NOT NULL,
+	"deleted"	INTEGER NOT NULL,
+	PRIMARY KEY("imageName"),
+	FOREIGN KEY("gameID") REFERENCES "games"("gameID")
+);
 CREATE TABLE IF NOT EXISTS "games" (
 	"gameID"	INTEGER NOT NULL,
 	"gameName"	TEXT NOT NULL,
 	"description"	TEXT NOT NULL,
 	"releaseDate"	INTEGER NOT NULL,
+	"price"	REAL NOT NULL,
+	"review"	INTEGER,
 	"wishlisted"	INTEGER NOT NULL,
+	"favored"	INTEGER,
+	"purchaseDate"	INTEGER,
 	"deleted"	INTEGER NOT NULL,
 	PRIMARY KEY("gameID" AUTOINCREMENT)
 );
-CREATE TABLE IF NOT EXISTS "gameCategories" (
-	"gameID"	INTEGER NOT NULL,
-	"categorieID"	INTEGER NOT NULL,
-	FOREIGN KEY("categorieID") REFERENCES "categories"("categorieID"),
-	FOREIGN KEY("gameID") REFERENCES "games"("gameID"),
-	PRIMARY KEY("gameID","categorieID")
-);
-CREATE TABLE IF NOT EXISTS "images" (
-	"imageID"	INTEGER NOT NULL,
-	"imageName"	TEXT NOT NULL UNIQUE,
-	"gameID"	INTEGER NOT NULL,
-	"deleted"	INTEGER NOT NULL,
-	FOREIGN KEY("gameID") REFERENCES "games"("gameID"),
-	PRIMARY KEY("imageID" AUTOINCREMENT)
+CREATE INDEX IF NOT EXISTS "deletedCategories" ON "categories" (
+	"deleted"
 );
 CREATE INDEX IF NOT EXISTS "wishlisted" ON "games" (
 	"wishlisted"
 );
-CREATE INDEX IF NOT EXISTS "deletedGames" ON "games" (
-	"deleted"
+CREATE INDEX IF NOT EXISTS "favored" ON "games" (
+	"favored"
 );
-CREATE INDEX IF NOT EXISTS "deletedCategories" ON "categories" (
+CREATE INDEX IF NOT EXISTS "purchasedGames" ON "games" (
+	"purchaseDate"
+);
+CREATE INDEX IF NOT EXISTS "deletedGames" ON "games" (
 	"deleted"
 );
 COMMIT;
