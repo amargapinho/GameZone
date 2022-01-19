@@ -10,25 +10,8 @@ class Image extends DatabaseObject {
 
     private $imageName;
     private $gameID;
-	private $deleted = false;
 
-	/**
-	 * @return bool
-	 */
-	public function isDeleted():bool {
-		return $this->deleted;
-	}
-
-	/**
-	 * @param bool $deleted
-	 * @return Image
-	 */
-	public function setDeleted(bool $deleted):self {
-		$this->deleted = $deleted;
-		return $this;
-	}
-
-    public function populate(array $data): self{
+    public function populate(array $data): DatabaseObject{
         return $this
             ->setImageName($data['imageName'])
             ->setGameID((int)$data['gameID'])
@@ -92,11 +75,6 @@ class Image extends DatabaseObject {
         ];
     }
 
-    public function delete(){
-        parent::delete();
-        unlink(self::PATH . $this->getImageName());
-    }
-
     /**
      * @return array
      */
@@ -156,10 +134,4 @@ class Image extends DatabaseObject {
         return DB::getInstance()->prepare('INSERT INTO images (imageName, deleted, gameID) VALUES(?, ?, ?)');
     }
 
-    /**
-     * @return PDOStatement
-     */
-    protected function prepareDelete(): PDOStatement{
-        return DB::getInstance()->prepare('DELETE FROM images WHERE imageID = ?');
-    }
 }

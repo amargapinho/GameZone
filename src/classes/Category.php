@@ -8,29 +8,12 @@ class Category extends DatabaseObject {
 
     private $categoryID;
     private $categoryName = '';
-	private $deleted = false;
-
-	/**
-	 * @return bool
-	 */
-	public function isDeleted():bool {
-		return $this->deleted;
-	}
-
-	/**
-	 * @param bool $deleted
-	 * @return Category
-	 */
-	public function setDeleted(bool $deleted):self {
-		$this->deleted = $deleted;
-		return $this;
-	}
 
     /**
      * @param array $data
      * @return self
      */
-    public function populate(array $data): self{
+    public function populate(array $data): DatabaseObject{
         return $this
 			->setCategoryID((int)$data['categoryID'])
 			->setCategoryName($data['categoryName'])
@@ -150,13 +133,6 @@ class Category extends DatabaseObject {
      */
     protected function prepareInsert(): PDOStatement{
         return DB::getInstance()->prepare('INSERT INTO categories (categoryName) VALUES (?)');
-    }
-
-    /**
-     * @return PDOStatement
-     */
-    protected function prepareDelete(): PDOStatement{
-        return DB::getInstance()->prepare('DELETE FROM categories WHERE categorieID = ?');
     }
 
     /**

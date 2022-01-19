@@ -24,7 +24,6 @@ class Game extends DatabaseObject{
     private $wishlisted = false;
 	private $favored = false;
 	private $purchaseDate;
-	private $deleted = false;
 
 	/**
 	 * @return bool
@@ -46,7 +45,7 @@ class Game extends DatabaseObject{
      * @param array $data
      * @return self
      */
-    public function populate(array $data): self{
+    public function populate(array $data): DatabaseObject{
         return $this
         ->setGameId((int)$data['gameId'])
         ->setGameName($data['gameName'])
@@ -258,26 +257,6 @@ class Game extends DatabaseObject{
     }
 
     /**
-     * Get the value of deleted
-     * 
-     * @return bool
-     */ 
-    public function isDeleted(): bool{
-        return $this->deleted;
-    }
-
-    /**
-     * Set the value of deleted
-     *
-     * @param bool $deleted
-     * @return  self
-     */
-    public function setDeleted(bool $deleted): self{
-        $this->deleted = $deleted;
-        return $this;
-    }
-
-    /**
      * @return self[]
      */
     public static function getAll(): array{
@@ -360,10 +339,6 @@ class Game extends DatabaseObject{
 
     protected function prepareInsert(): PDOStatement{
         return DB::getInstance()->prepare('INSERT INTO games (price, favored, gameName, description, releaseDate, wishlisted, deleted) VALUES(?, ?, ?, ?, ?, ?, ?)');
-    }
-
-    protected function prepareDelete(): PDOStatement{
-        return DB::getInstance()->prepare('UPDATE games SET deleted = TRUE WHERE gameID = ?');
     }
 
     public static function importCSV(string $csv): self{
