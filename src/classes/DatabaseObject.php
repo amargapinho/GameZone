@@ -52,7 +52,7 @@ abstract class DatabaseObject{
     }
 
     protected function insert(){
-        $this->prepareUpdate()->execute($this->getInsertParams());
+		$this->prepareInsert()->execute($this->getInsertParams());
         $this->setPrimaryKey(DB::getInstance()->lastInsertId());
     }
 
