@@ -8,31 +8,31 @@ class Image extends DatabaseObject {
 
     const PATH = __DIR__ . '/../images/';
 
-    private $imageID;
     private $imageName;
     private $gameID;
+	private $deleted = false;
+
+	/**
+	 * @return bool
+	 */
+	public function isDeleted():bool {
+		return $this->deleted;
+	}
+
+	/**
+	 * @param bool $deleted
+	 * @return Image
+	 */
+	public function setDeleted(bool $deleted):self {
+		$this->deleted = $deleted;
+		return $this;
+	}
 
     public function populate(array $data): self{
         return $this
-            ->setImageID($data['imageID'])
             ->setImageName($data['imageName'])
-            ->setGameID($data['gameID']);
-    }
-
-    /**
-     * @return int
-     */
-    public function getImageID(): int{
-        return $this->imageID;
-    }
-
-    /**
-     * @param int $imageID
-     * @return self
-     */
-    public function setImageID(int $imageID): self{
-        $this->imageID = $imageID;
-        return $this;
+            ->setGameID((int)$data['gameID'])
+			->setDeleted((bool)$data['deleted']);
     }
 
     /**
@@ -87,6 +87,7 @@ class Image extends DatabaseObject {
     protected function getInsertParams(): array{
         return [
             $this->getImageName(),
+			$this->isDeleted(),
             $this->getGameID()
         ];
     }
@@ -113,32 +114,42 @@ class Image extends DatabaseObject {
      * @return bool
      */
     protected function primaryKeyIsset(): bool{
-        return isset($this->imageID);
+        return isset($this->imageName);
+    }
+
+	/**
+	 * @return string
+	 */
+    protected function getPrimaryKey(): string{
+        return $this->getImageName();
     }
 
     /**
-     * @return int
-     */
-    protected function getPrimaryKey(): int{
-        return $this->getImageID();
-    }
-
-    /**
-     * @param int $id
+     * @param string $id
      * @return DatabaseObject
      */
-    protected function setPrimaryKey(int $id): DatabaseObject{
-        return $this->setImageID($id);
+    protected function setPrimaryKey($id): DatabaseObject{
+        return $this->setImageName($id);
     }
 
     /**
      * @return PDOStatement
      */
     protected function prepareUpdate(): PDOStatement{
-        return DB::getInstance()->prepare('UPDATE images SET imageName = ?, deleted = ?, gameID = ?, imageID = ? WHERE imageID = ?');
+        return DB::getInstance()->prepare('UPDATE images SET deleted = ? WHERE imageName = ?');
     }
 
-    /**
+	/**
+	 * @return array
+	 */
+	protected function getUpdateParams():array {
+		return [
+			$this->isDeleted(),
+			$this->getImageName()
+		];
+	}
+
+	/**
      * @return PDOStatement
      */
     protected function prepareInsert(): PDOStatement{

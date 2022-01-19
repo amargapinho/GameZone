@@ -6,16 +6,35 @@ use PDOStatement;
 
 class Category extends DatabaseObject {
 
-    private $categoryId;
+    private $categoryID;
     private $categoryName = '';
+	private $deleted = false;
+
+	/**
+	 * @return bool
+	 */
+	public function isDeleted():bool {
+		return $this->deleted;
+	}
+
+	/**
+	 * @param bool $deleted
+	 * @return Category
+	 */
+	public function setDeleted(bool $deleted):self {
+		$this->deleted = $deleted;
+		return $this;
+	}
+
     /**
      * @param array $data
      * @return self
      */
     public function populate(array $data): self{
         return $this
-        ->setCategoryId((int)$data['categoryId'])
-        ->setCategoryName($data['categoryName']);
+			->setCategoryID((int)$data['categoryID'])
+			->setCategoryName($data['categoryName'])
+			->setDeleted((bool)$data['deleted']);
     }
 
     /**
@@ -23,18 +42,18 @@ class Category extends DatabaseObject {
      * 
      * @return int
      */ 
-    public function getCategoryId(): int{
-        return $this->categoryId;
+    public function getCategoryID(): int{
+        return $this->categoryID;
     }
 
     /**
      * Set the value of categoryId
      *
-     * @param int $categoryId
+     * @param int $categoryID
      * @return  self
      */
-    public function setCategoryId(int $categoryId): self{
-        $this->categoryId = $categoryId;
+    public function setCategoryID(int $categoryID): self{
+        $this->categoryID = $categoryID;
         return $this;
     }
 
@@ -79,7 +98,7 @@ class Category extends DatabaseObject {
      * @return bool
      */
     public function primaryKeyIsset(): bool{
-        return isset($this->categoryId);
+        return isset($this->categoryID);
     }
 
     /**
@@ -99,7 +118,7 @@ class Category extends DatabaseObject {
      * @return int
      */
     public function getPrimaryKey(): int{
-        return $this->getCategoryId();
+        return $this->getCategoryID();
     }
 
     /**
@@ -115,8 +134,8 @@ class Category extends DatabaseObject {
      * @param int $id
      * @return DatabaseObject
      */
-    protected function setPrimaryKey(int $id): DatabaseObject{
-        return $this->setCategoryId($id);
+    protected function setPrimaryKey($id): DatabaseObject{
+        return $this->setCategoryID($id);
     }
 
     /**

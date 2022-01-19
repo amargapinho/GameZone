@@ -12,15 +12,15 @@ abstract class DatabaseObject{
     abstract protected function primaryKeyIsset(): bool;
 
     /**
-     * @return int
+     * @return int|string
      */
-    abstract protected function getPrimaryKey(): int;
+    abstract protected function getPrimaryKey();
 
     /**
-     * @param int $id
+     * @param int|string $id
      * @return self
      */
-    abstract protected function setPrimaryKey(int $id): self;
+    abstract protected function setPrimaryKey($id): self;
 
     /**
      * @return array
@@ -70,7 +70,7 @@ abstract class DatabaseObject{
     }
 
     /**
-     * @return int[]
+     * @return array
      */
     protected function getDeleteParams(): array{
         return [$this->getPrimaryKey()];

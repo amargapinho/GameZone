@@ -8,7 +8,7 @@ use PDOStatement;
 class Game extends DatabaseObject{
 
     private $gameId;
-    private $gameName;
+    private $gameName = '';
     /**
      * @var Image[]
      */
@@ -21,9 +21,26 @@ class Game extends DatabaseObject{
     private $releaseDate;
     private $price;
     private $review;
-    private $wishlisted;
-    private $purchaseDate;
-    private $deleted;
+    private $wishlisted = false;
+	private $favored = false;
+	private $purchaseDate;
+	private $deleted = false;
+
+	/**
+	 * @return bool
+	 */
+	public function isFavored():bool {
+		return $this->favored;
+	}
+
+	/**
+	 * @param bool $favored
+	 * @return Game
+	 */
+	public function setFavored(bool $favored):self {
+		$this->favored=$favored;
+		return $this;
+	}
 
     /**
      * @param array $data
@@ -31,15 +48,16 @@ class Game extends DatabaseObject{
      */
     public function populate(array $data): self{
         return $this
-        ->setGameId($data['gameId'])
+        ->setGameId((int)$data['gameId'])
         ->setGameName($data['gameName'])
         ->setDescription($data['description'])
-        ->setReleaseDate($data['releaseDate'])
-        ->setPrice($data['price'])
-        ->setReview($data['review'])
-        ->setWishlisted($data['wishlisted'])
+        ->setReleaseDate((int)$data['releaseDate'])
+        ->setPrice((float)$data['price'])
+        ->setReview((int)$data['review'])
+        ->setWishlisted((bool)$data['wishlisted'])
         ->setPurchaseDate($data['purchaseDate'])
-        ->setDeleted($data['deleted']);
+        ->setDeleted((bool)$data['deleted'])
+		->setFavored((bool)$data['favored']);
     }
 
     /**
@@ -352,15 +370,15 @@ class Game extends DatabaseObject{
         $csvArray = explode(";", $csv);
 
         $game
-        ->setGameName($csvArray[0])
-        ->setDescription($csvArray[1])
-        ->setReleaseDate($csvArray[2])
-        ->setPrice($csvArray[3])
-        ->setReview($csvArray[4])
-        ->setWishlisted($csvArray[5])
-        ->setPurchaseDate($csvArray[6])
-        ->setDeleted($csvArray[6])
-        ->save();
+			->setGameName($csvArray[0])
+			->setDescription($csvArray[1])
+			->setReleaseDate($csvArray[2])
+			->setPrice($csvArray[3])
+			->setReview($csvArray[4])
+			->setWishlisted($csvArray[5])
+			->setPurchaseDate($csvArray[6])
+			->setDeleted($csvArray[6])
+			->save();
 
         return $game;
     }
