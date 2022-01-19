@@ -12,7 +12,10 @@ class DB extends PDO{
 	const SQL_PATH = self::DB_FOLDER . 'database.sql';
     const DEFAULT_DB_PATH = self::DB_FOLDER . 'database.db';
 
-    public function __construct($dbPath = self::DEFAULT_DB_PATH){
+	/**
+	 * @param string $dbPath
+	 */
+    public function __construct(string $dbPath = self::DEFAULT_DB_PATH){
 		if(file_exists($dbPath)){
 			parent::__construct("sqlite:$dbPath");
 		}else {
