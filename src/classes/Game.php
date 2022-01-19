@@ -332,6 +332,7 @@ class Game extends DatabaseObject{
      */
     public function getInsertParams(): array{
         return [
+			$this->isFavored(),
             $this->getGameName(),
             $this->getDescription(),
             $this->getReleaseDate(),
@@ -348,16 +349,16 @@ class Game extends DatabaseObject{
         return $this->getGameId();
     }
 
-    protected function setPrimaryKey(int $id): DatabaseObject{
+    protected function setPrimaryKey($id): DatabaseObject{
         return $this->setGameId($id);
     }
 
     protected function prepareUpdate(): PDOStatement{
-        return DB::getInstance()->prepare('UPDATE games SET gameID = ?, gameName = ?, description = ?, releaseDate = ?, wishlisted = ?, deleted = ? WHERE gameID = ?');
+        return DB::getInstance()->prepare('UPDATE games SET favored = ?, gameID = ?, gameName = ?, description = ?, releaseDate = ?, wishlisted = ?, deleted = ? WHERE gameID = ?');
     }
 
     protected function prepareInsert(): PDOStatement{
-        return DB::getInstance()->prepare('INSERT INTO games (gameName, description, releaseDate, wishlisted, deleted) VALUES(?, ?, ?, ?, ?)');
+        return DB::getInstance()->prepare('INSERT INTO games (favored, gameName, description, releaseDate, wishlisted, deleted) VALUES(?, ?, ?, ?, ?, ?)');
     }
 
     protected function prepareDelete(): PDOStatement{
