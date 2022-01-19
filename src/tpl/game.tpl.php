@@ -1,3 +1,9 @@
+<?php
+
+use GameZone\Game;
+
+$game = Game::getGame($_GET['id'] ?? 1);
+?>
 <div class="float-left p-1 sticky-top">
   <button type="button" class="btn btn-primary menu-button"><i class="fas fa-arrow-left w-100 h-auto"></i></button>
 </div>
@@ -7,24 +13,32 @@
 
 <div class="container">
 
-  <h1 class="text-center py-5">Spiel Name</h1>
+  <h1 class="text-center py-5"><?=$game->getGameName()?></h1>
 
   <div id="carouselExampleControls" class="carousel slide py-5" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
+	  <ol class="carousel-indicators">
+	  <?php $firstSlide = true;?>
+	  <?php foreach ($game->getImages() as $key => $image):?>
+		  <li data-target="#carouselExampleIndicators" data-slide-to="<?=$key?>"
+			  <?php if($firstSlide):?>
+			  	<?php $firstSlide = false;?>
+				class="active"
+			  <?php endif;?>
+		  ></li>
+	  <?php endforeach;?>
+	  </ol>
     <div class="carousel-inner">
-      <div class="carousel-item  text-center active">
-      <i class="fas fa-gamepad h-50 w-auto"></i>
-      </div>
-      <div class="carousel-item text-center">
-      <i class="fas fa-gamepad h-50 w-auto"></i>
-      </div>
-      <div class="carousel-item text-center">
-      <i class="fas fa-gamepad h-50 w-auto"></i>
-      </div>
+		<?php $firstSlide = true;?>
+		<?php foreach ($game->getImages() as $image):?>
+			<div class="carousel-item text-center
+				<?php if($firstSlide):?>
+					<?php $firstSlide = false;?>
+					active
+				<?php endif;?>
+			">
+				<img src="src/images/<?=$image->getImageName()?>" class="h-50 w-auto" alt="<?=$game->getGameName()?>">
+			</div>
+		<?php endforeach;?>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -37,13 +51,13 @@
   </div>
 
   <h4 class="text-center py-5">
-    Preis (Amazon): 60€<br><br>
-    Bewertung <i class="fas fa-star"></i>
+    Preis (Amazon): <?=$game->getPrice()?>€<br><br>
+    Bewertung <?=$game->getReview()?><i class="fas fa-star"></i>
   </h4>
 
   <span class="text-center py-5">
     Spiel Beschreibung:<br><br>
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  	<?=$game->getDescription()?>
   </span>
 
 </div>
