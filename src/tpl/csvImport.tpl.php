@@ -1,5 +1,4 @@
-
-<form action="?action=importCSV" method="post" enctype="multipart/form-data">
-<input type="file" name="GameFile"/><br />
-<input type="Submit" value="Absenden" />
+<form method="post" enctype="multipart/form-data">
+	<input type="file" name="GameFile"/><br />
+	<button type="submit" name="action" value="importCSV">Importieren</button>
 </form>
