@@ -57,7 +57,7 @@ class Image extends DatabaseObject {
     public static function getImagesByGame(Game $game): array{
         $images = [];
 
-        $statement = DB::getInstance()->prepare('SELECT * FROM images WHERE gameID = ? AND deleted = FALSE');
+        $statement = DB::getInstance()->prepare('SELECT * FROM images WHERE gameID = ? AND deleted = 0');
         if($statement->execute([$game->getGameId()])){
             foreach ($statement->fetchAll() as $row) {
                 $images[] = (new self())->populate($row);
