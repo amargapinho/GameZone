@@ -343,10 +343,13 @@ class Game extends DatabaseObject{
         return DB::getInstance()->prepare('INSERT INTO games (review, purchaseDate, price, favored, gameName, description, releaseDate, wishlisted, deleted) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)');
     }
 
-    public static function importCSV(string $csv): self{
-        $game = new Game();
+	/**
+	 * @param array $csvArray
+	 * @return self
+	 */
+    public static function importCSV(array $csvArray): self{
 
-        $csvArray = explode(";", $csv);
+		$game = new self();
 
         $game
 			->setGameName($csvArray[0])
