@@ -1,15 +1,15 @@
 BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS "categories" (
-	"categorieID"	INTEGER NOT NULL,
+	"categoryID"	INTEGER NOT NULL,
 	"categoryName"	TEXT NOT NULL UNIQUE,
 	"deleted"	INTEGER NOT NULL,
-	PRIMARY KEY("categorieID" AUTOINCREMENT)
+	PRIMARY KEY("categoryID" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "gameCategories" (
 	"gameID"	INTEGER NOT NULL,
-	"categorieID"	INTEGER NOT NULL,
-	PRIMARY KEY("gameID","categorieID"),
-	FOREIGN KEY("categorieID") REFERENCES "categories"("categorieID"),
+	"categoryID"	INTEGER NOT NULL,
+	PRIMARY KEY("gameID","categoryID"),
+	FOREIGN KEY("categoryID") REFERENCES "categories"("categoryID"),
 	FOREIGN KEY("gameID") REFERENCES "games"("gameID")
 );
 CREATE TABLE IF NOT EXISTS "images" (
