@@ -6,16 +6,16 @@ use GameZone\Category;
 use GameZone\Game;
 use GameZone\Json;
 
-if(isset($_POST['action'])){
+if(isset($_GET['action'])){
 
-	switch ($_POST['action']){
+	switch ($_GET['action']){
 
 		case 'getGame':
-			Json::send(Game::getGame($_POST['id']));
+			Json::send(Game::getGame($_GET['id']));
 			break;
 
 		case 'getCategory':
-			Json::send(Category::getCategory($_POST['id']));
+			Json::send(Category::getCategory($_GET['id']));
 			break;
 
 
