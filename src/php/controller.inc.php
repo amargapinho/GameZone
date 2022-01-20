@@ -11,5 +11,9 @@ if(isset($_POST['action'])){
 			include PHP . 'saveCategory.inc.php';
 			break;
 
+		case 'deleteCategory':
+			include PHP . 'deleteCategory.inc.php';
+			break;
+
 	}
 }
