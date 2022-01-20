@@ -152,4 +152,20 @@ class Category extends DatabaseObject {
 
         return $categories;
     }
+
+	/**
+	 * @param int $id
+	 * @return self
+	 */
+	public static function getCategory(int $id): self{
+		$category = new self();
+
+		$statement = DB::getInstance()->prepare('SELECT * FROM categories WHERE categorieID = ?');
+		if($statement->execute([$id]) && $data = $statement->fetch()){
+			$category->populate($data);
+		}
+
+		return $category;
+	}
+
 }
