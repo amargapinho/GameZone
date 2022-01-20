@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/src/tpl/head.tpl.php';
+const SRC = __DIR__ . '/src/';
+const TPL = SRC .'tpl/';
+const PHP = SRC . 'php/';
 
-include __DIR__ . '/src/tpl/game.tpl.php';
-include __DIR__ . '/src/tpl/gameModal.tpl.php';
+require_once __DIR__ . '/vendor/autoload.php';
+require_once TPL . 'head.tpl.php';
