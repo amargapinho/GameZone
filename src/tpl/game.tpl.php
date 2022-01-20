@@ -17,22 +17,18 @@ $game = Game::getGame($_GET['id'] ?? 1);
 
   <div id="carouselExampleControls" class="carousel slide py-5" data-ride="carousel">
 	  <ol class="carousel-indicators">
-	  <?php $firstSlide = true;?>
 	  <?php foreach ($game->getImages() as $key => $image):?>
 		  <li data-target="#carouselExampleIndicators" data-slide-to="<?=$key?>"
-			  <?php if($firstSlide):?>
-			  	<?php $firstSlide = false;?>
+			  <?php if($key === 0):?>
 				class="active"
 			  <?php endif;?>
 		  ></li>
 	  <?php endforeach;?>
 	  </ol>
     <div class="carousel-inner">
-		<?php $firstSlide = true;?>
-		<?php foreach ($game->getImages() as $image):?>
+		<?php foreach ($game->getImages() as $key => $image):?>
 			<div class="carousel-item text-center
-				<?php if($firstSlide):?>
-					<?php $firstSlide = false;?>
+				<?php if($key === 0):?>
 					active
 				<?php endif;?>
 			">
