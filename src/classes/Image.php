@@ -11,6 +11,10 @@ class Image extends DatabaseObject {
     private $imageName;
     private $gameID;
 
+	/**
+	 * @param array $data
+	 * @return DatabaseObject
+	 */
     public function populate(array $data): DatabaseObject{
         return $this
             ->setImageName($data['imageName'])
@@ -67,6 +71,9 @@ class Image extends DatabaseObject {
         return $images;
     }
 
+	/**
+	 * @return array
+	 */
     protected function getInsertParams(): array{
         return [
             $this->getImageName(),
