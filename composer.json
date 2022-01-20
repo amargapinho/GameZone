@@ -3,7 +3,8 @@
         "marcl/amazonproductapi": "^3.0",
       "ext-pdo": "*",
         "mpdf/mpdf": "^8.0",
-        "php": ">=7.1"
+        "php": ">=7.1",
+      "ext-json": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "7"
