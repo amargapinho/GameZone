@@ -16,13 +16,17 @@ class DB extends PDO{
 	 * @param string $dbPath
 	 */
     public function __construct(string $dbPath = self::DEFAULT_DB_PATH){
+
+		$dsn = "sqlite:$dbPath";
+
 		if(file_exists($dbPath)){
-			parent::__construct("sqlite:$dbPath");
+			parent::__construct($dsn);
 		}else {
 			file_put_contents($dbPath, '');
-			parent::__construct("sqlite:$dbPath");
+			parent::__construct($dsn);
 			$this->exec(file_get_contents(self::SQL_PATH));
 		}
+
         $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 
