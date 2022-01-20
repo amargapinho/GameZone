@@ -11,7 +11,7 @@ if(isset($_GET['action'])){
 	switch ($_GET['action']){
 
 		case 'getGame':
-			Json::send(Game::getGame($_GET['id']));
+			Json::send(Game::getGame($_GET['id'])->loadCategories());
 			break;
 
 		case 'getCategory':
