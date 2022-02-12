@@ -25,7 +25,7 @@ class Game extends DatabaseObject{
 	private $favored = false;
 	private $purchaseDate;
 
-	/**
+    /**
 	 * @return bool
 	 */
 	public function isFavored():bool {
@@ -364,4 +364,12 @@ class Game extends DatabaseObject{
 
         return $game;
     }
+
+    /**
+     * @return string
+     */
+    public function getTwitchImage(): string{
+        return TwitchSearch::getInstance()->search($this->getGameName());
+    }
+
 }
