@@ -90,4 +90,10 @@ abstract class DatabaseObject{
 			->save();
     }
 
+    public function recover(){
+        $this
+            ->setDeleted(false)
+            ->save();
+    }
+
 }
