@@ -67,7 +67,7 @@ class Category extends DatabaseObject {
     public static function getCategoriesByGame(Game $game): array{
         $categories = [];
 
-        $statement = DB::getInstance()->prepare('SELECT * FROM categories INNER JOIN gameCategories ON categories.categorieID = gameCategories.categorieID WHERE gameCategories.gameID = ? AND categories.deleted = FALSE');
+        $statement = DB::getInstance()->prepare('SELECT categories.* FROM categories INNER JOIN gameCategories ON categories.categoryID = gameCategories.categoryID WHERE gameCategories.gameID = ? AND categories.deleted = FALSE');
         if($statement->execute([$game->getGameId()])){
             foreach ($statement->fetchAll() as $row){
                 $categories[] = (new self())->populate($row);
