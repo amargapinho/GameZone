@@ -9,16 +9,18 @@ class TwitchSearch{
     private $curl;
 
     private function __construct(){
-        $this->curl = curl_init();
-        curl_setopt($this->curl, CURLOPT_HTTPHEADER, Config::CURL_HEADER);
-        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
+		if($this->isTwitchAvailable()) {
+			$this->curl=curl_init();
+			foreach (Config::CURL_OPTIONS as $option=>$value) {
+				curl_setopt($this->curl, $option, $value);
+			}
+		}
     }
 
     public function __destruct(){
-        curl_close($this->curl);
+		if($this->isTwitchAvailable()) {
+			curl_close($this->curl);
+		}
     }
 
     /**
@@ -26,10 +28,15 @@ class TwitchSearch{
      * @return string
      */
     public function search(string $query): string{
-        $query = $this->shrinkToMaxSize($query);
-        $jsonResponse = $this->request($query);
-        $response = $this->parseResponse($jsonResponse);
-        return $this->getBestMatch($query, $response);
+		if($this->isTwitchAvailable()) {
+			$query=$this->shrinkToMaxSize($query);
+			$jsonResponse=$this->request($query);
+			$response=$this->parseResponse($jsonResponse);
+
+			return $this->getBestMatch($query, $response);
+		}
+
+		return '';
     }
 
     /**
@@ -82,5 +89,9 @@ class TwitchSearch{
     private function shrinkToMaxSize(string $string): string{
         return substr($string, 0, 255);
     }
+
+	public function isTwitchAvailable(): bool{
+		return Config::TWITCH_CLIENT_ID !== '' && Config::TWITCH_TOKEN !== '';
+	}
 
 }
