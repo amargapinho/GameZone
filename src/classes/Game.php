@@ -372,4 +372,25 @@ class Game extends DatabaseObject{
         return TwitchSearch::getInstance()->search($this->getGameName());
     }
 
+            /**
+     * Get the value of favorite
+     * 
+     * @return bool
+     */ 
+    public function isFavorite(): bool{
+        return $this->favorite;
+    }
+
+    /**
+     * Set the value of favorite
+     *
+     * @param bool $favorite
+     * @return  self
+     */
+    public function setFavorite(bool $favorite): self{
+        $this->favorite = $favorite;
+        return $this;
+    }
+
+
 }
