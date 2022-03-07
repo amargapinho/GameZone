@@ -2,18 +2,19 @@
 
 namespace GameZone;
 
-trait Singleton{
+trait Singleton {
 
-    private static $instance;
+	private static $instance;
 
-    /**
-     * @return self
-     */
-    public static function getInstance(): self{
-        if(!isset(self::$instance)){
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * @return self
+	 */
+	public static function getInstance():self {
+		if (!isset(self::$instance)) {
+			self::$instance=new self();
+		}
+
+		return self::$instance;
+	}
 
 }

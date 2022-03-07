@@ -2,10 +2,12 @@
 
 namespace GameZone;
 
-class TwitchGame{
+class TwitchGame {
 
-    public $id;
-    public $name;
-    public $box_art_url;
+	public $id;
+
+	public $name;
+
+	public $box_art_url;
 
 }

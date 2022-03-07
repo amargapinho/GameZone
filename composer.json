@@ -1,13 +1,9 @@
 {
     "require": {
         "ext-pdo": "*",
-        "mpdf/mpdf": "^8.0",
         "ext-json": "*",
-        "composer": "^2.2",
-        "ext-curl": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "7"
+        "ext-curl": "*",
+        "tecnickcom/tcpdf": "^6.4"
     },
     "autoload": {
         "psr-4":{

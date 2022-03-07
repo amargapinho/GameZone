@@ -2,11 +2,11 @@
 
 namespace GameZone;
 
-class TwitchResponse{
+class TwitchResponse {
 
-    /**
-     * @var TwitchGame[]
-     */
-    public $data;
+	/**
+	 * @var TwitchGame[]
+	 */
+	public $data;
 
 }

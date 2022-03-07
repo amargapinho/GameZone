@@ -4,6 +4,8 @@ namespace GameZone;
 
 class Config{
 
+	const CSV_PATH = __DIR__ . '/../csv/';
+
     const TWITCH_CLIENT_ID = '';
     const TWITCH_TOKEN = '';
 
