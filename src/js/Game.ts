@@ -6,8 +6,6 @@ class Game{
     price: number
     review: number
     wishlisted: boolean
-    favored: boolean
-    purchaseDate: number
     deleted: boolean
     categories: Category[]
 }

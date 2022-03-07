@@ -1,6 +1,3 @@
-var Category = /** @class */ (function () {
-    function Category() {
-    }
-    return Category;
-}());
+class Category {
+}
 //# sourceMappingURL=Category.js.map

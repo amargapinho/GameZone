@@ -2,27 +2,32 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="gameModalTitle">Rubrik Bearbeiten</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<h5 class="modal-title" id="gameModalTitle">Kategorie</h5>
 			</div>
-			<div class="modal-body">
-				<form method="post">
-					<div class="form-group">
-						<label for="categoryID" hidden></label>
-						<input type="number" class="form-control" id="categoryID" name="categoryID" hidden>
+			<form method="post" id="categoryForm">
+				<div class="modal-body">
+					<div class="form-group" hidden>
+						<label for="categorieID">Category ID</label>
+						<input type="number" class="form-control" id="categorieID" name="categorieID">
 					</div>
 					<div class="form-group">
-						<label for="categoryName">Rubrik Name</label>
-						<input type="text" class="form-control" id="categoryName" name="categoryName">
+						<label for="categoryName">Name</label>
+						<input type="text" class="form-control" id="categoryName" name="categoryName" required>
 					</div>
-					<button type="submit" name="action" value="saveCategory">Speichern</button>
-				</form>
-			</div>
-			<div class="modal-footer d-flex justify-content-between">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
-			</div>
+				</div>
+				<div class="modal-footer d-flex justify-content-between">
+					<button
+						type="submit"
+						name="action"
+						value="saveCategory"
+						class="btn btn-primary">
+						Speichern
+					</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">
+						Abbrechen
+					</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

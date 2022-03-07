@@ -1,6 +1,3 @@
-var Game = /** @class */ (function () {
-    function Game() {
-    }
-    return Game;
-}());
+class Game {
+}
 //# sourceMappingURL=Game.js.map

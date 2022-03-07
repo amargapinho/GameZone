@@ -1,8 +1,7 @@
-var RequestData = /** @class */ (function () {
-    function RequestData(action, id) {
+class RequestData {
+    constructor(action, value) {
         this.action = action;
-        this.id = id;
+        this.value = value;
     }
-    return RequestData;
-}());
+}
 //# sourceMappingURL=RequestData.js.map
